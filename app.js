@@ -3,7 +3,7 @@ const accessKey = '9ZxquBwF0m84AqtRRIn-Wd9bAE_rm0onZdRuZ3dEtQ8'
 const searchForm = document.getElementById("search-form");
 const searchBox = document.getElementById("search-box");
 const searchResult = document.getElementById("search-result");
-const searchMoreBtn = document.getElementById("search-more-btn");
+const showMoreBtn = document.getElementById("show-more-btn");
 
 let keyword = "";
 let page = 1;
@@ -27,10 +27,16 @@ async function searchImages(){
 		imageLink.appendChild(image);
 		searchResult.appendChild(imageLink);
 	})
+	showMoreBtn.style.display = "block"; 
 }
 
 searchForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 	page = 1;
+	searchImages();
+})
+
+showMoreBtn.addEventListener("click", () => {
+	page++;
 	searchImages();
 })

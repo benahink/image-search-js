@@ -15,6 +15,11 @@ async function searchImages(){
 	const response = await fetch(url);
 	const data = await response.json();
 
+	// to reset search keyword
+	if(page === 1){
+		searchResult.innerHTML = "";
+	}
+
 	const results = data.results;
 
 	results.map(result => {
@@ -27,16 +32,22 @@ async function searchImages(){
 		imageLink.appendChild(image);
 		searchResult.appendChild(imageLink);
 	})
+
+	// to display the "Show more" btn
 	showMoreBtn.style.display = "block"; 
 }
 
+// Show results of keyword search
 searchForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 	page = 1;
 	searchImages();
 })
 
+// display 12 additional images with every click 
 showMoreBtn.addEventListener("click", () => {
 	page++;
 	searchImages();
 })
+
+// TODO: when pressing enter from keyboard, previous search results are displayed again
